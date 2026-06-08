@@ -5,7 +5,6 @@ on:
     branches: [ "main" ]
     paths:
       - "backend/**"
-      - "k8s/deployment.yaml"
       - ".github/workflows/backend-cicd.yml"
   workflow_dispatch:
 
@@ -13,7 +12,8 @@ permissions:
   contents: write
 
 jobs:
-  build-push-update:
+  build-push-deploy:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     env:
       REGISTRY: swr.cn-south-1.myhuaweicloud.com
@@ -21,8 +21,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set image tag
         id: vars
@@ -47,18 +45,45 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_REPO }}:${{ steps.vars.outputs.IMAGE_TAG }}
 
       - name: Update Kubernetes deployment image tag
+        env:
+          IMAGE_TAG: ${{ steps.vars.outputs.IMAGE_TAG }}
         run: |
           python3 - <<'PY'
-          from pathlib import Path
-          path = Path('k8s/deployment.yaml')
-          text = path.read_text(encoding='utf-8')
+          import os
           import re
-          pattern = r'(image:\s*swr\.cn-south-1\.myhuaweicloud\.com/cloud-course/backend:)([^\s]+)'
-          updated, count = re.subn(pattern, r'\1${{ steps.vars.outputs.IMAGE_TAG }}', text, count=1)
+          from pathlib import Path
+
+          path = Path("k8s/deployment.yaml")
+          text = path.read_text(encoding="utf-8")
+          updated, count = re.subn(
+              r"(image:\s*swr\.cn-south-1\.myhuaweicloud\.com/cloud-course/backend:)\S+",
+              rf"\1{os.environ['IMAGE_TAG']}",
+              text,
+              count=1,
+          )
           if count != 1:
-              raise SystemExit('backend image line not found in k8s/deployment.yaml')
-          path.write_text(updated, encoding='utf-8')
+              raise SystemExit("backend image line not found in k8s/deployment.yaml")
+          path.write_text(updated, encoding="utf-8")
           PY
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Write kubeconfig
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        run: |
+          mkdir -p "$HOME/.kube"
+          echo "$KUBE_CONFIG_DATA" | base64 -d > "$HOME/.kube/config"
+
+      - name: Apply Kubernetes manifests
+        run: |
+          kubectl apply -f k8s/configmap-secret.yaml
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
+
+      - name: Verify rollout
+        run: kubectl rollout status deployment/backend -n default --timeout=180s
 
       - name: Commit updated deployment manifest
         run: |

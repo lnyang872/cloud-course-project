@@ -42,6 +42,9 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile.backend
           push: true
+          provenance: false
+          sbom: false
+          platforms: linux/amd64
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_REPO }}:${{ steps.vars.outputs.IMAGE_TAG }}
 
       - name: Update Kubernetes deployment image tag

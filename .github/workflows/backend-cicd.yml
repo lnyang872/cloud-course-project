@@ -60,7 +60,7 @@ jobs:
           text = path.read_text(encoding="utf-8")
           updated, count = re.subn(
               r"(image:\s*swr\.cn-south-1\.myhuaweicloud\.com/cloud-course/backend:)\S+",
-              rf"\1{os.environ['IMAGE_TAG']}",
+              r"\g<1>" + os.environ["IMAGE_TAG"],
               text,
               count=1,
           )

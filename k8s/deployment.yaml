@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: swr.cn-south-1.myhuaweicloud.com/cloud-course/backend:v1
+          image: swr.cn-south-1.myhuaweicloud.com/cloud-course/backend:a2f481d
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000

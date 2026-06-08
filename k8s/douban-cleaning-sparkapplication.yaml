@@ -1,0 +1,27 @@
+apiVersion: sparkoperator.k8s.io/v1beta2
+kind: SparkApplication
+metadata:
+  name: douban-cleaning
+  namespace: default
+spec:
+  type: Python
+  mode: cluster
+  image: swr.cn-south-1.myhuaweicloud.com/cloud-course/douban-spark:v1
+  imagePullPolicy: Always
+  mainApplicationFile: local:///opt/spark/app/douban_cleaning.py
+  sparkVersion: "3.4.3"
+  restartPolicy:
+    type: Never
+  driver:
+    cores: 1
+    coreLimit: "1200m"
+    memory: "1g"
+    labels:
+      version: "3.4.3"
+    serviceAccount: spark
+  executor:
+    cores: 1
+    instances: 2
+    memory: "1g"
+    labels:
+      version: "3.4.3"

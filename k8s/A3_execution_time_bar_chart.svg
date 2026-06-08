@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600">
+  <rect width="1000" height="600" fill="#ffffff"/>
+  <text x="500" y="55" text-anchor="middle" font-family="Microsoft YaHei, SimHei, Arial" font-size="32" font-weight="700" fill="#222222">û∞πgLˆÙ˘‘</text>
+  <line x1="130" y1="500" x2="930" y2="500" stroke="#333333" stroke-width="2"/>
+  <line x1="130" y1="100" x2="130" y2="500" stroke="#333333" stroke-width="2"/>
+  <text x="70" y="300" text-anchor="middle" font-family="Microsoft YaHei, SimHei, Arial" font-size="22" fill="#333333" transform="rotate(-90 70 300)">gLˆÙ/s</text>
+  <g font-family="Microsoft YaHei, SimHei, Arial" font-size="16" fill="#666666">
+    <line x1="130" y1="500" x2="930" y2="500" stroke="#dddddd" stroke-width="1"/>
+    <text x="115" y="506" text-anchor="end">0</text>
+    <line x1="130" y1="433.33" x2="930" y2="433.33" stroke="#dddddd" stroke-width="1" stroke-dasharray="6 5"/>
+    <text x="115" y="439.33" text-anchor="end">2</text>
+    <line x1="130" y1="366.67" x2="930" y2="366.67" stroke="#dddddd" stroke-width="1" stroke-dasharray="6 5"/>
+    <text x="115" y="372.67" text-anchor="end">4</text>
+    <line x1="130" y1="300" x2="930" y2="300" stroke="#dddddd" stroke-width="1" stroke-dasharray="6 5"/>
+    <text x="115" y="306" text-anchor="end">6</text>
+    <line x1="130" y1="233.33" x2="930" y2="233.33" stroke="#dddddd" stroke-width="1" stroke-dasharray="6 5"/>
+    <text x="115" y="239.33" text-anchor="end">8</text>
+    <line x1="130" y1="166.67" x2="930" y2="166.67" stroke="#dddddd" stroke-width="1" stroke-dasharray="6 5"/>
+    <text x="115" y="172.67" text-anchor="end">10</text>
+    <line x1="130" y1="100" x2="930" y2="100" stroke="#dddddd" stroke-width="1" stroke-dasharray="6 5"/>
+    <text x="115" y="106" text-anchor="end">12</text>
+  </g>
+  <rect x="225" y="478.59" width="120" height="21.41" rx="6" fill="#2E86DE"/>
+  <rect x="440" y="134.80" width="120" height="365.20" rx="6" fill="#F39C12"/>
+  <rect x="655" y="122.38" width="120" height="377.62" rx="6" fill="#E74C3C"/>
+  <g font-family="Microsoft YaHei, SimHei, Arial" font-size="19" font-weight="700" fill="#222222">
+    <text x="285" y="465" text-anchor="middle">0.6422s</text>
+    <text x="500" y="120" text-anchor="middle">10.9559s</text>
+    <text x="715" y="108" text-anchor="middle">11.3285s</text>
+  </g>
+  <g font-family="Microsoft YaHei, SimHei, Arial" font-size="20" fill="#333333">
+    <text x="285" y="535" text-anchor="middle">Pandas U:</text>
+    <text x="500" y="535" text-anchor="middle">PySpark</text>
+    <text x="500" y="562" text-anchor="middle">executor=1</text>
+    <text x="715" y="535" text-anchor="middle">PySpark</text>
+    <text x="715" y="562" text-anchor="middle">executor=2</text>
+  </g>
+  <text x="500" y="590" text-anchor="middle" font-family="Microsoft YaHei, SimHei, Arial" font-size="16" fill="#666666">pneêA-3 Pandas U: PySpark executor=1/2 '˝K’</text>
+</svg>

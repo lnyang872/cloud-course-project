@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wordcount-script
+  namespace: default
+data:
+  wordcount.py: |
+    from pyspark.sql import SparkSession
+
+    spark = SparkSession.builder.appName("wordcount").getOrCreate()
+    sc = spark.sparkContext
+
+    text = [
+        "cloud computing course design",
+        "spark operator on kubernetes",
+        "spark wordcount example",
+        "cloud spark kubernetes"
+    ]
+
+    counts = (
+        sc.parallelize(text)
+        .flatMap(lambda line: line.split())
+        .map(lambda word: (word, 1))
+        .reduceByKey(lambda a, b: a + b)
+        .collect()
+    )
+
+    for word, count in sorted(counts):
+        print(f"{word}: {count}")
+
+    spark.stop()

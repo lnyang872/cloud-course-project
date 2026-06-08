@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>云计算技术课程设计</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: linear-gradient(135deg, #0f766e, #2563eb);
+      color: #111827;
+    }
+    .card {
+      width: min(760px, calc(100% - 40px));
+      padding: 36px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25);
+    }
+    h1 {
+      margin: 0 0 12px;
+      color: #0f172a;
+    }
+    .info {
+      margin: 16px 0;
+      padding: 16px;
+      border-radius: 14px;
+      background: #eff6ff;
+      line-height: 1.8;
+    }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 22px;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+    }
+    pre {
+      overflow: auto;
+      padding: 16px;
+      border-radius: 14px;
+      background: #0f172a;
+      color: #d1fae5;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>云计算技术课程设计</h1>
+    <p>Flask 后端 API + Redis 数据库 + Nginx 前端</p>
+    <div class="info">
+      <div>成员1：2023112451-黄林辉</div>
+      <div>成员2：2023112403-杨力宁</div>
+    </div>
+    <button onclick="pingBackend()">测试后端 /api/ping</button>
+    <pre id="result">点击按钮测试前后端通信</pre>
+  </main>
+
+  <script>
+    async function pingBackend() {
+      const result = document.getElementById('result');
+      result.textContent = '请求中...';
+      try {
+        const response = await fetch('/api/ping');
+        const data = await response.json();
+        result.textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        result.textContent = '请求失败：' + error;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+FROM swr.cn-south-1.myhuaweicloud.com/cloud-course/pyspark:v9
+
+WORKDIR /opt/spark/app
+COPY douban_movies.csv /opt/spark/app/douban_movies.csv
+COPY a3_spark_groupby.py /opt/spark/app/a3_spark_groupby.py
